@@ -1,4 +1,92 @@
-# Train & compare multiple regression models to predict car prices with Azure Machine Learning designer
+# 複数の回帰モデルをトレーニングして比較し、Azure Machine Learning デザイナーで自動車の価格を予測します
+<!-- # Train & compare multiple regression models to predict car prices with Azure Machine Learning designer -->
+
+<!-- 訳注: multiple regression models は「複数の回帰モデル」以外に「重回帰モデル」とも訳せますが、文意から前者で訳しています。 -->
+
+**デザイナーサンプル2**
+
+
+デザイナーを使用してコードを 1 行も書かずに機械学習パイプラインを構築する方法を学びます。 このサンプルでは、複数の回帰モデルをトレーニングして比較し、技術的特徴に基づいて自動車の価格を予測します。 独自の機械学習の問題に取り組むことができるように、このパイプラインで行われた選択の根拠を提供します。
+<!-- Learn how to build a machine learning pipeline without writing a single line of code using the designer. This sample trains and compares multiple regression models to predict a car's price based on its technical features. We'll provide the rationale for the choices made in this pipeline so you can tackle your own machine learning problems. -->
+
+機械学習を始めたばかりの場合は、このパイプラインの [基本バージョン](regression-automobile-price-prediction-basic.md) をご覧ください。
+<!-- If you're just getting started with machine learning, take a look at the [basic version](regression-automobile-price-prediction-basic.md) of this pipeline. -->
+
+このパイプラインの完成したグラフは次のとおりです。
+<!-- Here's the completed graph for this pipeline: -->
+
+[![パイプラインのグラフ](./media/regression-automobile-price-prediction-compare-algorithms/graph.png)](./media/regression-automobile-price-prediction-compare-algorithms/graph.png#lightbox)
+
+
+## パイプラインの概要
+
+次の手順を使用して、機械学習パイプラインを構築します。
+<!-- Use following steps to build the machine learning pipeline: -->
+
+1. データを取得します。
+1. データを前処理します。
+1. モデルをトレーニングします。
+1. モデルをテスト、評価、および比較します。
+
+
+## データを取得する
+
+このサンプルでは、UCI Machine Learning Repository からの **Automobile price data (Raw)** データセットを使用します。 このデータセットには、メーカー、モデル、価格、車両の特徴 (シリンダー数など)、MPG、保険リスク スコアなど、自動車に関する情報を含む 26 列が含まれています。
+
+
+## データの前処理
+
+主なデータ準備タスクには、データのクリーニング、統合、変換、縮小、および離散化または量子化が含まれます。 デザイナーでは、左側のパネルの **Data Transformation** グループで、これらの操作やその他のデータ前処理タスクを実行するモジュールを見つけることができます。
+
+**Select Columns in Dataset** モジュールを使用して、多くの欠損値を持つ正規化された損失を除外します。 次に **Clean Missing Data** を使用して、欠損値のある行を削除します。 これは、トレーニング データのクリーンなセットを作成するのに役立ちます。
+
+![データ前処理](./media/regression-automobile-price-prediction-compare-algorithms/data-processing.png)
+
+
+## モデルをトレーニングする
+
+機械学習の問題はさまざまです。 一般的な機械学習タスクには、分類、クラスタリング、回帰、レコメンデーション システムが含まれ、それぞれに異なるアルゴリズムが必要になる場合があります。 アルゴリズムの選択は、多くの場合、ユース ケースの要件によって異なります。 アルゴリズムを選択したら、そのパラメーターを調整して、より正確なモデルをトレーニングする必要があります。 次に、精度、わかりやすさ、効率などの指標に基づいてすべてのモデルを評価する必要があります。
+
+このパイプラインの目的は自動車の価格を予測することであり、ラベル列 (価格) には実数が含まれているため、回帰モデルが適しています。
+
+さまざまなアルゴリズムのパフォーマンスを比較するために、**Boosted Decision Tree Regression** と **Decision Forest Regression** という 2 つの非線形アルゴリズムを使用してモデルを構築します。 どちらのアルゴリズムにも変更可能なパラメーターがありますが、このサンプルでは、このパイプラインの既定値を使用しています。
+
+**Split Data** モジュールを使用して入力データをランダムに分割し、トレーニング データセットに元のデータの 70% が含まれ、テスト データセットに元のデータの 30% が含まれるようにします。
+
+
+## モデルをテスト、評価、比較する
+
+前のセクションで説明したように、ランダムに選択された 2 つの異なるデータ セットを使用してモデルをトレーニングし、テストします。 データセットを分割し、異なるデータセットを使用してモデルのトレーニングとテストを行い、モデルの評価をより客観的にします。
+
+モデルのトレーニングが完了したら、**Score Model** モジュールと **Evaluate Model** モジュールを使用して予測結果を生成し、モデルを評価します。 **Score Model** は、トレーニング済みのモデルを使用して、テスト データセットの予測を生成します。 次に、スコアを **Evaluate Model** に渡して、評価指標を生成します。
+
+
+
+結果は次のとおりです。
+
+![結果を比較](./media/regression-automobile-price-prediction-compare-algorithms/result.png)
+
+これらの結果は、**Boosted Decision Tree Regression** で構築されたモデルは、**Decision Forest Regression** で構築されたモデルよりも二乗平均平方根誤差が低いことを示しています。
+
+
+## 次のステップ
+
+デザイナーが利用できるその他のサンプルを調べます。
+
+- [サンプル 1 - 回帰: 自動車の価格を予測する](regression-automobile-price-prediction-basic.md)
+- [サンプル 3 - 特徴選択による分類: 所得予測](binary-classification-feature-selection-income-prediction.md)
+- [サンプル 4 - 分類: 信用リスクの予測 (コスト重視)](binary-classification-python-credit-prediction.md)
+- [サンプル 5 - 分類: チャーンを予測する](binary-classification-customer-relationship-prediction.md)
+- [サンプル 6 - 分類: フライトの遅延を予測する](r-script-flight-delay-prediction.md)
+- [サンプル 7 - テキスト分類: ウィキペディア SP 500 データセット](text-classification-wiki.md)
+
+
+---
+
+
+Original: https://github.com/Azure/MachineLearningDesigner/blob/master/articles/samples/regression-automobile-price-prediction-compare-algorithms.md
+
+<!-- # Train & compare multiple regression models to predict car prices with Azure Machine Learning designer
 
 **Designer sample 2**
 
@@ -67,4 +155,4 @@ Explore the other samples available for the designer:
 - [Sample 4 - Classification: Predict credit risk (cost sensitive)](binary-classification-python-credit-prediction.md)
 - [Sample 5 - Classification: Predict churn](binary-classification-customer-relationship-prediction.md)
 - [Sample 6 - Classification: Predict flight delays](r-script-flight-delay-prediction.md)
-- [Sample 7 - Text Classification: Wikipedia SP 500 Dataset](text-classification-wiki.md)
+- [Sample 7 - Text Classification: Wikipedia SP 500 Dataset](text-classification-wiki.md) -->
