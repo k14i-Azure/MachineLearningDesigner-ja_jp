@@ -73,7 +73,7 @@ def azureml_main(dataframe1 = None, dataframe2 = None):
 **Python スクリプトの実行** モジュールは、トレーニング データセットとテスト データセットの両方を複製します。
 <!-- The **Execute Python Script** module replicates both the training and test datasets. -->
 
-### 特徴エンジニアリング
+### 特徴量エンジニアリング
 
 **2 クラス サポート ベクター マシン** アルゴリズムには、正規化されたデータが必要です。 **Normalize Data** モジュールを使用して、すべての数値特徴の範囲を `tanh`変換で正規化します。 `tanh`変換は、値の全体的な分布を維持しながら、すべての数値機能を 0 から 1 の範囲内の値に変換します。
 <!-- The **Two-Class Support Vector Machine** algorithm requires normalized data. So use the **Normalize Data** module to normalize the ranges of all numeric features with a `tanh` transformation. A `tanh` transformation converts all numeric features to values within a range of 0 and 1 while preserving the overall distribution of values. -->

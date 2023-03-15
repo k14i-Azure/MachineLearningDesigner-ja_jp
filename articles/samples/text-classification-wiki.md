@@ -18,7 +18,7 @@
 
 1. データを取得する<!-- 1. Get the data -->
 1. テキストデータの前処理<!-- 1. Pre-process the text data -->
-1. 特徴エンジニアリング<!-- 1. Feature Engineering -->
+1. 特徴量エンジニアリング<!-- 1. Feature Engineering -->
    - 特徴ハッシュなどの特徴抽出モジュールを使用してテキスト特徴を数値特徴に変換し、テキスト データから n-gram 特徴を抽出します。<!-- Convert text feature into the numerical feature with feature extracting module such as feature hashing, extract n-gram feature from the text data. -->
 2. モデルをトレーニングする<!-- 1. Train the model -->
 3. スコアデータセット<!-- 1. Score dataset -->
@@ -52,9 +52,9 @@
 テキスト データを前処理した後、**Split Data** モジュールを使用して入力データをランダムに分割し、トレーニング データセットに元のデータの 50% が含まれ、テスト データセットに元のデータの 50% が含まれるようにします。
 <!-- After pre-processing text data, we use the **Split Data** module to randomly divide the input data so that the training dataset contains 50% of the original data and the testing dataset contains 50% of the original data. -->
 
-## 特徴エンジニアリング
+## 特徴量エンジニアリング
 
-このサンプルでは、特徴エンジニアリングを実行する 2 つの方法を使用します。
+このサンプルでは、特徴量エンジニアリングを実行する 2 つの方法を使用します。
 <!-- In this sample, we will use two methods performing feature engineering. -->
 
 ### 特徴ハッシング
@@ -73,7 +73,7 @@
 n-gram は、指定された一連のテキストからの n 個の用語の連続したシーケンスです。 サイズ 1 の n-gram はユニグラムと呼ばれます。 サイズ 2 の n-gram はバイグラムです。 サイズ 3 の n-gram はトライグラムです。 より大きなサイズの N グラムは、n の値によって参照されることがあります。たとえば、「4 グラム」、「5 グラム」などです。
 <!-- An n-gram is a contiguous sequence of n terms from a given sequence of text. An n-gram of size 1 is referred to as a unigram; an n-gram of size 2 is a bigram; an n-gram of size 3 is a trigram. N-grams of larger sizes are sometimes referred to by the value of n, for instance, "four-gram", "five-gram", and so on. -->
 
-特徴エンジニアリングの別のソリューションとして、[**Extract N-Gram Feature from Text**](algorithm-module-reference/extract-n-gram-features-from-text.md) モジュールを使用しました。 このモジュールは、最初に n-gram のセットを抽出し、n-gram に加えて、各 n-gram がテキスト内に出現するドキュメントの数をカウントします (DF)。 このサンプルでは、TF-IDF メトリクスを使用して特徴値を計算します。 次に、非構造化テキスト データを等しい長さの数値特徴ベクトルに変換します。各特徴は、テキスト インスタンス内の n-gram の TF-IDF を表します。
+特徴量エンジニアリングの別のソリューションとして、[**Extract N-Gram Feature from Text**](algorithm-module-reference/extract-n-gram-features-from-text.md) モジュールを使用しました。 このモジュールは、最初に n-gram のセットを抽出し、n-gram に加えて、各 n-gram がテキスト内に出現するドキュメントの数をカウントします (DF)。 このサンプルでは、TF-IDF メトリクスを使用して特徴値を計算します。 次に、非構造化テキスト データを等しい長さの数値特徴ベクトルに変換します。各特徴は、テキスト インスタンス内の n-gram の TF-IDF を表します。
 <!-- We used [**Extract N-Gram Feature from Text**](algorithm-module-reference/extract-n-gram-features-from-text.md) module as another solution for feature engineering. This module first extracts the set of n-grams, in addition to the n-grams, the number of documents where each n-gram appears in the text is counted(DF). In this sample, TF-IDF metric is used to calculate feature values. Then, it converts unstructured text data into equal-length numeric feature vectors where each feature represents the TF-IDF of an n-gram in a text instance. -->
 
 テキスト データを数値の特徴ベクトルに変換した後、**Select Column** モジュールを使用して、データセットからテキスト データを削除します。
@@ -95,7 +95,7 @@ n-gram は、指定された一連のテキストからの n 個の用語の連�
 モデルがトレーニングされた後、**Score Model** および **Evaluate Model** モジュールを使用して、予測結果を生成し、モデルを評価します。 ただし、**Score Model** モジュールを使用する前に、トレーニング中に行ったのと同じように機能エンジニアリングを実行する必要があります。
 <!-- After the model is trained, we would use the **Score Model** and **Evaluate Model** modules to generate predicted results and evaluate the models. However, before using the **Score Model** module, performing feature engineering as what we have done during training is required.  -->
 
-**Feature Hashing** モジュールの場合、トレーニング フローとして、スコアリング フローに関する特徴エンジニアリングを簡単に実行できます。 **Feature Hashing** モジュールを直接使用して、入力テキスト データを処理します。
+**Feature Hashing** モジュールの場合、トレーニング フローとして、スコアリング フローに関する特徴量エンジニアリングを簡単に実行できます。 **Feature Hashing** モジュールを直接使用して、入力テキスト データを処理します。
 <!-- For **Feature Hashing** module, it is easy to perform feature engineer on scoring flow as training flow. Use **Feature Hashing** module directly to process the input text data. -->
 
 **Extract N-Gram Feature from Text** モジュールの場合、トレーニング データフローの **Result Vocabulary output** をスコアリング データフローの **Input Vocabulary** に接続します。そして、**Vocabulary mode** パラメータを **ReadOnly** に設定します。
