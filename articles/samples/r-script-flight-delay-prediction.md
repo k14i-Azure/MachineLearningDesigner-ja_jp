@@ -46,7 +46,7 @@
 
 ![編集-メタデータ](./media/r-script-flight-delay-prediction/edit-metadata.png)
 
-次に、データセット モジュールの **Select Columns** を使用して、潜在的なターゲット リーカー (推論用データが入手できないにもかかわらず学習時に特徴列として扱うことで、機械学習モデルに含まれてしまう、精度を歪める要因) であるデータセット列を除外します: **DepDelay**、**DepDel15**、**ArrDelay**、**Canceled**、** 年**。
+次に、データセット モジュールの **Select Columns** を使用して、潜在的なターゲット リーカー (推論用データが入手できないにもかかわらず学習時に特徴列として扱うことで、機械学習モデルに含まれてしまう、精度を歪める要因) であるデータセット列を除外します: **DepDelay**、**DepDel15**、**ArrDelay**、**Canceled**、**Year**。
 <!-- Then use the **Select Columns** in Dataset module to exclude from the dataset columns that are possible target leakers: **DepDelay**, **DepDel15**, **ArrDelay**, **Canceled**, **Year**.  -->
 
 フライト レコードを 1 時間ごとの気象レコードと結合するには、出発予定時刻を結合キーの 1 つとして使用します。 結合を行うには、CSRDepTime 列を最も近い時間に切り下げる必要があります。これは **R スクリプトの実行** モジュールで行われます。

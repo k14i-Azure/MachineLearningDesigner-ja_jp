@@ -1,4 +1,4 @@
-# 分類器を構築し、特徴選択を使用して Azure Machine Learning デザイナーで収入を予測します
+# 分類器を構築し、特徴選択を使用して Azure Machine Learning デザイナーで収入を予測する
 <!-- # Build a classifier & use feature selection to predict income with Azure Machine Learning designer -->
 
 **デザイナーサンプル3**

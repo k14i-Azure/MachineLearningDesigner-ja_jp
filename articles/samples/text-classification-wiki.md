@@ -1,4 +1,4 @@
-# Azure Machine Learning デザイナーを使用して、会社のカテゴリを予測する分類器を構築します。
+# Azure Machine Learning デザイナーを使用して、会社のカテゴリを予測する分類器を構築する
 <!-- # Build a classifier to predict company category using Azure Machine Learning designer. -->
 
 **デザイナーサンプル7**

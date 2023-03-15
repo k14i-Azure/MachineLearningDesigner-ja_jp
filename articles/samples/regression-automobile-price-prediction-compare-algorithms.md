@@ -1,4 +1,4 @@
-# 複数の回帰モデルをトレーニングして比較し、Azure Machine Learning デザイナーで自動車の価格を予測します
+# 複数の回帰モデルをトレーニングして比較し、Azure Machine Learning デザイナーで自動車の価格を予測する
 <!-- # Train & compare multiple regression models to predict car prices with Azure Machine Learning designer -->
 
 <!-- 訳注: multiple regression models は「複数の回帰モデル」以外に「重回帰モデル」とも訳せますが、文意から前者で訳しています。 -->

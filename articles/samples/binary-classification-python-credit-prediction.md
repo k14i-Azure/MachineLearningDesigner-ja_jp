@@ -1,4 +1,4 @@
-# 分類器を構築し、Python スクリプトを使用して、Azure Machine Learning デザイナーを使用して信用リスクを予測します
+# 分類器を構築し、Python スクリプトを使用して、Azure Machine Learning デザイナーを使用して信用リスクを予測する
 <!-- # Build a classifier & use Python scripts to predict credit risk using Azure Machine Learning designer -->
 
 **デザイナーサンプル4**
